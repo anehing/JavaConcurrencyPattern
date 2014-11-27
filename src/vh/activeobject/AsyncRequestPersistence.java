@@ -43,7 +43,7 @@ public class AsyncRequestPersistence implements RequestPersistence {
 
 	// ActiveObjectPattern.Scheduler
 	private final ThreadPoolExecutor scheduler;
-
+	
 	private static class InstanceHolder {
 		final static RequestPersistence INSTANCE = new AsyncRequestPersistence();
 	}
