@@ -3,6 +3,12 @@ package vh.threadfactory;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * @author ane
+ *
+ * @version 2:00:06 PM 2014
+ *
+ */
 public class DefaultThreadFactory implements ThreadFactory {
 
 	public static final AtomicInteger poolNumber =new AtomicInteger(1);

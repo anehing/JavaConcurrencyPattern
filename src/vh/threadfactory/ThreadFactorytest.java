@@ -28,6 +28,12 @@ class DaemonThreadFactory implements ThreadFactory{
 	}
 	
 }
+/**
+ * @author ane
+ *
+ * @version 2:00:18 PM 2014
+ *
+ */
 public class ThreadFactorytest {
 
 	public static void main(String[] args)  {

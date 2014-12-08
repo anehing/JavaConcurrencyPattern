@@ -16,6 +16,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 
+/**
+ * @author ane
+ *
+ * @version 2:04:27 PM 2014
+ *
+ */
 public class DiskbasedRequestPersistence implements RequestPersistence {
 	// 负责缓存文件的存储管理
 	private final SectionBasedDiskStorage storage = new SectionBasedDiskStorage();
