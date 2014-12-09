@@ -22,42 +22,48 @@ public class TestMultiThread implements Runnable {
     private static volatile Integer vi = 0;  
     private static AtomicInteger ai = new AtomicInteger();  
     private static Integer si = 0; 
-    private static Integer si2 = 0; 
-    private static int si3 = 0; 
-    private static int si4 = 0; 
+    private static Integer si_obj = 0; 
+    private static int sio1 = 0; 
+    private static int sio = 0; 
+    private static int sio2 = 0;
     private static int ri;  
     private static Object o = new Object();
+    private static Object o1 = new Object();
+    private static Object o2 = new Object();
     private static AtomicInteger flag = new AtomicInteger();  
     private Lock lock = new ReentrantLock();  	
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		for(int k=0;k<20000000;k++){  
+		for(int k=0;k<200000000;k++){  
             i++;  
             vi++;  
             ai.incrementAndGet();  
-            synchronized(o){  
+            synchronized(si){  
                 si++;  
             } 
             synchronized(o){  
-                si3++;  
+                sio++; 
+                si_obj++;
             } 
-            synchronized(si2){  
-                si2++;  
+            synchronized(o1){  
+                sio1++;  
+                o1 = new Object();
             } 
+           
             
-            synchronized(o){    
-                si4++;
-                Object temp = o;
+            synchronized(o2){    
+                sio2++;
+                Object temp = o2;
                 for (int i=0;i<10;i++){
                 	    
-                     o = new Object();    
+                     o2 = new Object();    
                       
                 }
-                o = temp;
+                o2 = temp;
             }    
-
+      
             lock.lock();  
             try{  
                 ri++;  
@@ -81,16 +87,18 @@ public class TestMultiThread implements Runnable {
             if(flag.intValue()==2){  
                 System.out.println("i>>>>>>"+i);  
                 System.out.println("vi>>>>>"+vi);  
-                System.out.println("ai>>>>>"+ai); 
-                System.out.println("si3>>>>>"+si3); 
-                System.out.println("si>>>>>"+si);     
-                System.out.println("si2>>>>>"+si2); 
-                System.out.println("si4>>>>>"+si4);  
+                System.out.println("ai>>>>>"+ai);
+                System.out.println("si>>>>>"+si); 
+                System.out.println("except sio == si_obj");  
+                System.out.println("sio>>>>>"+sio); 
+                System.out.println("si_obj>>>>>"+si_obj); 
+                System.out.println("except sio2 < sio1"); 
+                System.out.println("sio1>>>>>"+sio1);     
+                System.out.println("sio2>>>>>"+sio2); 
                 System.out.println("ri>>>>>"+ri);      
                 break;  
             }  
             Thread.sleep(50);  
         }  
-
 	}
 }
