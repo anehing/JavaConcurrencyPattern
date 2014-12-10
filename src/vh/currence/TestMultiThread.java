@@ -19,7 +19,16 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
  */
 public class TestMultiThread implements Runnable {
     private static int i;  
-    private static volatile Integer vi = 0;  
+    private static int num;
+    private static volatile Integer vi = 0; 
+    private static  long long1 = 0; 
+    private static  long long2 = 0; 
+    private static volatile long v_long = 0; 
+    private static volatile long v_long2 = 0; 
+    private static double double1 = 0; 
+    private static double double2 = 0; 
+    private static volatile double v_dou= 0;
+    private static volatile double v_dou2= 0; 
     private static AtomicInteger ai = new AtomicInteger();  
     private static Integer si = 0; 
     private static Integer si_obj = 0; 
@@ -32,11 +41,18 @@ public class TestMultiThread implements Runnable {
     private static Object o2 = new Object();
     private static AtomicInteger flag = new AtomicInteger();  
     private Lock lock = new ReentrantLock();  	
-
+    private static int num(){
+		return num++;
+    }
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		for(int k=0;k<200000000;k++){  
+		for(int k=0;k<200000000;k++){ 
+			num();
+			long1++;
+			double1++;
+			v_long++;
+			v_dou++;
             i++;  
             vi++;  
             ai.incrementAndGet();  
@@ -46,6 +62,10 @@ public class TestMultiThread implements Runnable {
             synchronized(o){  
                 sio++; 
                 si_obj++;
+                v_long2++;
+                v_dou2++;
+                long2++;
+                double2++;
             } 
             synchronized(o1){  
                 sio1++;  
@@ -85,6 +105,7 @@ public class TestMultiThread implements Runnable {
         exec2.execute(t2); 
         while(true){  
             if(flag.intValue()==2){  
+            	System.out.println("num()>>>>>>"+num);
                 System.out.println("i>>>>>>"+i);  
                 System.out.println("vi>>>>>"+vi);  
                 System.out.println("ai>>>>>"+ai);
@@ -95,7 +116,15 @@ public class TestMultiThread implements Runnable {
                 System.out.println("except sio2 < sio1"); 
                 System.out.println("sio1>>>>>"+sio1);     
                 System.out.println("sio2>>>>>"+sio2); 
-                System.out.println("ri>>>>>"+ri);      
+                System.out.println("ri>>>>>"+ri);    
+                System.out.println("long1>>>>>>"+long1);  
+                System.out.println("long2 in synchronized>>>>>"+long2);  
+                System.out.println("double2 in synchronized>>>>>"+double2);
+                System.out.println("double1>>>>>"+double1);
+                System.out.println("v_long>>>>>"+v_long);
+                System.out.println("v_long2 in synchronized >>>>>"+v_long2);
+                System.out.println("v_dou1>>>>>"+v_dou);
+                System.out.println("v_dou2 in synchronized >>>>>"+v_dou2);
                 break;  
             }  
             Thread.sleep(50);  
