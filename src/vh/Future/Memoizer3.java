@@ -16,6 +16,7 @@ public class Memoizer3 <A,V> implements Computable <A,V> {
     }
     @Override
     public  V compute(A arg) throws InterruptedException {
+        V result = null;
         Future <V> f = cache.get(arg);
         if(f == null){
             Callable<V> eval = new Callable<V>() {
@@ -30,9 +31,10 @@ public class Memoizer3 <A,V> implements Computable <A,V> {
             ft.run();
         }
         try{
-            return f.get();
+            result = f.get();
         }catch (ExecutionException e){
             e.printStackTrace();
         }
+        return result;
     }
 }
