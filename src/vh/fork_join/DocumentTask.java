@@ -59,4 +59,5 @@ public class DocumentTask extends RecursiveTask<Integer> {
         Integer result;
         result=number1+number2;
         return result;
-    }}
+    }
+}

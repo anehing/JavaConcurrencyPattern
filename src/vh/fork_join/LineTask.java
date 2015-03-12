@@ -47,6 +47,4 @@ public class LineTask extends RecursiveTask<Integer>{
         }
         return counter;
     }
-
-
 }

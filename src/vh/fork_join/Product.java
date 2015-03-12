@@ -1,11 +1,11 @@
 package vh.fork_join;
 
 /**
- * Created by ane on 1/20/15.
+ * Created by ane on 2/3/15.
  */
 public class Product {
-    private String name;
-    private double price;
+    public String name;
+    public double price;
 
     public String getName() {
         return name;
